@@ -16,13 +16,13 @@ public class SecurityConfiguration {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
-//                .authorizeHttpRequests(authorize -> authorize
-//                        .requestMatchers("/auth/**", "/api/public/**").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/api/cart/**").hasRole("CUSTOMER")
-//                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
-//                        .anyRequest().authenticated()
-//                )
-//                .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/auth/**", "/api/public/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/cart/**").hasRole("CUSTOMER")
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> {});
         return http.build();
